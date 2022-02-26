@@ -1,0 +1,51 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewBag.Title = "AddNewBlog";
+    Layout = "~/Views/Shared/AuthorLayout.cshtml";
+}
+<style>
+    .newBlogAddButton {
+        background-image: linear-gradient(to left bottom,rgba(29, 179, 206, 0.8),rgb(151, 186, 224));
+    }
+
+    .fontBold {
+        font-family: 'Martel', serif;
+        font-weight: 800;
+    }
+</style>
+
+@using (Html.BeginForm("AddNewBlog", "AuthorUser", FormMethod.Post, new { enctype = "multipart/form-data" ,@class="pt-3"}))
+{
+
+    <div class="form-group col-8 ">
+        @Html.Label("Başlık", new { @class = "fontBold" })
+        @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogTitle, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group col-8 ">
+        @Html.Label("Kategori", new { @class = "fontBold" })
+        @Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.categories,"Kategori Seçiniz", new { @class = "form-control" })
+
+    </div>
+    <div class="form-group col-8">
+        @Html.Label("Kapak Resmi", new { @class = "fontBold" })
+        <br />
+        <input type="file" name="BlogCoverImage" />
+        @Html.ValidationMessageFor(x => x.BlogCoverImage, "", new { @class = "text-danger" })
+    </div>
+        <div class="form-group col-10">
+            @Html.Label("İçerik", new { @class = "fontBold" })
+            @Html.TextAreaFor(x => x.BlogContent,new { @class = "form-control",id = "summernote" } )
+            @Html.ValidationMessageFor(x => x.BlogContent, "", new { @class = "text-danger" })
+        </div>
+        <input name="AuthorID" value="@ViewBag.authorID" hidden />
+
+        <div class="col-10  text-center">
+            <button class="btn btn-primary newBlogAddButton w-50  px-3 fontBold">Ekle</button>
+        </div>
+       
+
+ 
+}
+
+

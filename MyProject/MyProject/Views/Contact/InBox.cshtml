@@ -1,0 +1,217 @@
+﻿@using EntityLayer.Concrete
+@model List<Contact>
+@{
+    ViewBag.Title = "InBox";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<style>
+    .fontBold {
+        font-family: 'Martel', serif;
+        font-weight: 800;
+    }
+</style>
+<html>
+
+<body class="hold-transition sidebar-mini">
+
+
+
+    <section class="content-header ">
+
+        <div class="container-fluid">
+
+            <div class="row mb-2 text-center ">
+
+                <div class="col-sm-6 mx-auto">
+
+                    <h1 class="fontBold">Gelen Kutusu</h1>
+
+                </div>
+
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="row">
+
+         
+
+            <!-- /.col -->
+
+            <div class="col-md-12">
+
+                <div class="card card-primary card-outline">
+
+                    <div class="card-header">
+
+                        <h3 class="card-title">Gelen Mesajlar</h3>
+
+                   
+
+                        <!-- /.card-tools -->
+
+                    </div>
+
+                    <!-- /.card-header -->
+
+                    <div class="card-body p-0">
+
+               
+
+                        <div class="table-responsive mailbox-messages">
+
+                            <table class="table table-hover table-striped">
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+
+                                        <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+
+                                        <td class="mailbox-name"><a href="/Contact/MessageDetalis/@item.ContactID">@item.Name @item.Surname</a></td>
+
+                                        <td class="mailbox-subject">
+
+                                            <b>@item.Subject  </b>@item.Message.Substring(0, 50) ...
+
+                                        </td>
+
+                                        <td class="mailbox-attachment"></td>
+
+                                        <td class="mailbox-date">@(((DateTime)item.ContactDate).ToString("dd-MMM-yyyy"))</td>
+
+                                    </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+
+                            <!-- /.table -->
+
+                        </div>
+
+                        <!-- /.mail-box-messages -->
+
+                    </div>
+
+                    <!-- /.card-body -->
+
+                  
+
+                </div>
+
+                <!-- /.card -->
+
+            </div>
+
+            <!-- /.col -->
+
+        </div>
+
+        <!-- /.row -->
+
+    </section>
+
+    <!-- jQuery -->
+
+    <script src="/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+
+    <script src="/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE App -->
+
+    <script src="/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+
+    <!-- Page Script -->
+
+    <script>
+    $(function () {
+
+            //Enable check and uncheck all functionality
+
+            $('.checkbox-toggle').click(function () {
+
+                var clicks = $(this).data('clicks')
+
+                if (clicks) {
+
+                    //Uncheck all checkboxes
+
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+
+                    $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+
+                } else {
+
+                    //Check all checkboxes
+
+                    $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+
+                    $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+
+                }
+
+                $(this).data('clicks', !clicks)
+
+            })
+
+
+
+            //Handle starring for glyphicon and font awesome
+
+            $('.mailbox-star').click(function (e) {
+
+                e.preventDefault()
+
+                //detect type
+
+                var $this = $(this).find('a > i')
+
+                var glyph = $this.hasClass('glyphicon')
+
+                var fa = $this.hasClass('fa')
+
+
+
+                //Switch states
+
+                if (glyph) {
+
+                    $this.toggleClass('glyphicon-star')
+
+                    $this.toggleClass('glyphicon-star-empty')
+
+                }
+
+
+
+                if (fa) {
+
+                    $this.toggleClass('fa-star')
+
+                    $this.toggleClass('fa-star-o')
+
+                }
+
+            })
+
+        })</script>
+
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="/AdminLTE-3.0.4/dist/js/demo.js"></script>
+
+</body>
+
+</html>
+

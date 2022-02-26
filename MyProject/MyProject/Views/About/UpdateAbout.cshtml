@@ -1,0 +1,122 @@
+﻿@using EntityLayer.Concrete
+@model List<About>
+@{
+    ViewBag.Title = "UpdateAbout";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .newBlogAddButton {
+            background-image: linear-gradient(to left bottom,rgba(29, 179, 206, 0.8),rgb(151, 186, 224));
+        }
+
+        .fontBold {
+            font-family: 'Martel', serif;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+
+
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card card-primary">
+
+                    <div class="card-header">
+
+                        <h3 class="card-title fontBold">Hakkımızda Güncelleme Sayfası </h3>
+
+                    </div>
+
+                    @using (Html.BeginForm("UpdateAbout", "About", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                <div class="card-body">
+                    @foreach (var item in Model)
+                    {
+                        <div class="form-group ">
+                            <input type="text" id="inputName" name="AboutID" hidden class="form-control" value="@item.AboutID">
+                            <label for="inputName">Biz Kimiz Görsel &nbsp;</label>
+
+                            <input type="file" id="inputName" name="AboutImage1">
+                            <img src="@item.AboutImage1" class="d-inline-block" style="height:auto;width:30%" />
+
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="inputName">Neler Yapıyoruz Görsel &nbsp; </label>
+
+                            <input type="file" id="inputName" name="AboutImage2">
+                            <img src="@item.AboutImage2" class="d-inline-block" style="height:auto;width:30%" />
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="inputDescription">Biz Kimiz</label>
+
+                            <textarea id="summernote" name="WhoAreWeText" class="form-control" rows="4"> @Html.Raw( item.WhoAreWeText)</textarea>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="inputDescription">Neler Yapıyoruz</label>
+
+                            <textarea id="summernote2" name="WhatDoWeDo" class="form-control" rows="4"> @Html.Raw( item.WhatDoWeDo)</textarea>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label for="inputDescription">Footer Hakkımızda</label>
+
+                            <textarea id="summernote3" name="AboutUsInFooter" class="form-control" rows="4"> @Html.Raw(item.AboutUsInFooter)</textarea>
+
+                        </div>
+
+
+
+
+                    }
+                    <button class="btn btn-primary newBlogAddButton px-3 fontBold">Güncelle</button>
+
+                </div>
+                }
+                    <!-- /.card-body -->
+
+                </div>
+
+                <!-- /.card -->
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </section>
+
+</body>
+
+</html>
+
+
+
+
+

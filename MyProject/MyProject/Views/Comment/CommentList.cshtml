@@ -1,0 +1,22 @@
+﻿@using EntityLayer.Concrete
+@model List<Comment>
+<div class="pt-5">
+    <h3 class="mb-5">Yorumlar  <img src="~/AdminLTE-3.0.4/dist/img/commentsicon2.png" style="width:60px;height:auto" /></h3>
+   
+    <ul class="comment-list">
+        @foreach(var item in Model) {
+        <li class="comment">
+            <div class="vcard">
+                <img src="~/AdminLTE-3.0.4/dist/img/usericon1.png" alt="Image placeholder">
+            </div>
+            <div class="comment-body">
+                <h3>@item.UserName</h3>
+                <div class="meta">@(((DateTime)item.CommentDate).ToString("dd-MMM-yyyy"))</div>
+                <p>@item.CommentText</p>
+            </div>
+        </li>
+
+        }
+    </ul>
+   
+</div>

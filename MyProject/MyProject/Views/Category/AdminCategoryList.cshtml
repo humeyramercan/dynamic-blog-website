@@ -1,0 +1,225 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+@{
+    ViewBag.Title = "AdminCategoryList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+    <style>
+        .fontBold {
+            font-family: 'Martel', serif;
+            font-weight: 800;
+        }
+
+        .newBlogAddButton {
+            background-image: linear-gradient(to left bottom,rgba(29, 179, 206, 0.8),rgb(151, 186, 224));
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+
+
+
+    <section class="content">
+
+
+        <h2 class="fontBold text-center pt-3">Kategori Listesi</h2>
+
+
+
+        <div class="card">
+
+
+
+            <div class="card-body p-0">
+
+                <table class="table table-striped projects">
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="width: 20%">
+
+                                Kategori Adı
+
+                            </th>
+
+                            <th style="width: 30%">
+
+                                Kategori Açıklaması
+
+                            </th>
+
+
+
+                            <th style="width: 8%" class="text-center">
+
+                                Durum
+
+                            </th>
+
+                            <th style="width: 20%">
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+
+                            <tr>
+
+
+
+                                <td>
+
+                                    @item.CategoryName
+
+                                </td>
+
+                                <td class="col-4">
+
+                                    @item.CategoryDescription
+
+
+
+                                </td>
+
+
+
+                                <td class="project-state">
+                                    @if (item.CategoryID != 1 && item.CategoryID != 2 && item.CategoryID != 3 && item.CategoryID != 4 && item.CategoryID != 5 && item.CategoryID != 6 && item.CategoryID != 7 && item.CategoryID != 8)
+                                    {
+                                    if (item.CategoryStatus == true)
+                                    {
+
+                                        <span class="badge badge-success">Aktif</span>
+                                    }
+                                    else
+                                    {
+
+                                        <span class="badge badge-danger">Pasif</span>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                         <span class="badge badge-success">Aktif</span>
+                                    }
+                                </td>
+
+                                <td class="row">
+                                    @if (item.CategoryID != 1 && item.CategoryID != 2 && item.CategoryID != 3 && item.CategoryID != 4 && item.CategoryID != 5 && item.CategoryID != 6 && item.CategoryID != 7 && item.CategoryID != 8)
+                                    {
+                                        <div class="col-4">
+                                            <a class="btn btn-primary btn-sm pl-2 pr-2" href="/Blog/BlogByCategory/@item.CategoryID">
+
+                                                <i class="fas fa-folder">
+
+                                                </i>
+                                             
+                                                Yazılar
+
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a class="btn btn-info btn-sm " href="/Category/UpdateCategory/@item.CategoryID">
+
+                                                <i class="fas fa-pencil-alt">
+
+                                                </i>
+
+                                                Düzenle
+
+                                            </a>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-6">
+                                            <a class="btn btn-primary btn-sm p-3" href="/Blog/BlogByCategory/@item.CategoryID">
+
+                                                <i class="fas fa-folder">
+
+                                                </i>
+                                             
+                                                Yazılar
+
+                                            </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <a class="btn btn-info btn-sm p-3" href="/Category/UpdateCategory/@item.CategoryID">
+
+                                                <i class="fas fa-pencil-alt">
+
+                                                </i>
+
+                                                Düzenle
+
+                                            </a>
+
+                                        </div>
+                                    }
+                                    <div class="col-4">
+                                        @if (item.CategoryID != 1 && item.CategoryID != 2 && item.CategoryID != 3 && item.CategoryID != 4 && item.CategoryID != 5 && item.CategoryID != 6 && item.CategoryID != 7 && item.CategoryID != 8)
+                                        {
+                                            if (item.CategoryStatus == true)
+
+                                            {
+                                                <a class="btn btn-danger btn-sm " onclick="return confirm('Emin misiniz?')" href="/Category/MakePassive/@item.CategoryID">
+                                                    <i class="far fa-times-circle "></i>
+                                                    <span>Pasif Yap</span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+
+                                                <a class="btn btn-success btn-sm " onclick="return confirm('Emin misiniz?')" href="/Category/MakeActive/@item.CategoryID">
+                                                    <i class="far fa-check-circle"></i>
+                                                    <span>Aktif Yap</span>
+                                                </a>
+                                            }
+                                        }
+                                    </div>
+                                </td>
+
+
+                            </tr>
+
+                        </tbody>
+                    }
+                </table>
+
+            </div>
+
+            <!-- /.card-body -->
+
+
+
+        </div>
+
+        <div class="row text-center">
+            <div class="col-4 mx-auto my-3">
+                <a href="/Category/AddNewCategory/" class="btn btn-primary newBlogAddButton p-2 w-100 ">Yeni Kategori Ekle</a>
+            </div>
+        </div>
+
+    </section>
+
+
+</body>
+
+
+
+</html>

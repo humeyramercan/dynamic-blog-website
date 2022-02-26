@@ -1,0 +1,70 @@
+﻿@model EntityLayer.Concrete.Comment
+@{
+    ViewBag.Title = "BlogDetails";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    //Herhangi bir bloğa tıkladığızda blog ile ilgili detayların olduğu sayfa
+}
+
+@Html.Action("BlogCover", "Blog")
+<section class="site-section py-lg">
+    <div class="container">
+        <div class="row blog-entries element-animate">
+            <div class="col-md-12 col-lg-8 main-content">
+                @Html.Action("BlogContent", "Blog")
+                @Html.Action("CommentList", "Comment")
+                <div class="comment-form-wrap pt-5">
+                    <h3 class="mb-5">Yorum yazınız</h3>
+                    @using (Html.BeginForm("BlogDetails", "Blog", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.Label("Adınız Soyadınız")
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Mail Adresiniz")
+                            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Yorumunuz")
+                            @Html.TextAreaFor(x => x.CommentText, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CommentText, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group " >
+                            @Html.Label("Puanınız ")
+                            <label>@Html.RadioButton("BlogRating", 1) 1</label>
+                            <label>@Html.RadioButton("BlogRating", 2) 2</label>
+                            <label>@Html.RadioButton("BlogRating", 3) 3</label>
+                            <label>@Html.RadioButton("BlogRating", 4) 4</label>
+                            <label>@Html.RadioButton("BlogRating", 5) 5</label>
+                            <label>@Html.RadioButton("BlogRating", 6) 6</label>
+                            <label>@Html.RadioButton("BlogRating", 7) 7</label>
+                            <label>@Html.RadioButton("BlogRating", 8) 8</label>
+                            <label>@Html.RadioButton("BlogRating", 9) 9</label>
+                            <label>@Html.RadioButton("BlogRating", 10) 10</label>
+                          
+                            @Html.ValidationMessageFor(x => x.BlogRating, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="hidden" value="@ViewBag.id" name="BlogID" />
+                        <div class="form-group">
+                            <input type="submit" value="Yorum Yap" class="btn btn-primary">
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 sidebar">
+                @Html.Action("AuthorAbout", "Author")
+                @Html.Action("AuthorPopulerPosts", "Author")
+                @Html.Action("BlogDetailsCategoryList", "Category")
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@Html.Action("Footer", "About")

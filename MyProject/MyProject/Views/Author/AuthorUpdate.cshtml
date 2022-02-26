@@ -1,0 +1,66 @@
+﻿@model EntityLayer.Concrete.Author
+@{
+    ViewBag.Title = "AuthorUpdate";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AuthorUpdate", "Author", FormMethod.Post, new { enctype = "multipart/form-data", @class = "col-8 py-3" }))
+{
+    @Html.TextBoxFor(x => x.AuthorID, new { style = "display: none;" })
+
+    <div class="form-group ">
+        @Html.Label("Yazar Adı Soyadı", new { @class = "fontBold" })
+        @Html.TextBoxFor(x => x.AuthorName, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        @Html.Label("Profil Resmi", new { @class = "fontBold" })
+        
+        <input type="file" name="AuthorImage" />
+        <img src="@Model.AuthorImage" class="d-inline-block" style="height:auto;width:30%" />
+
+
+    </div>
+    <div class="form-group">
+        @Html.Label("Yazar Hakkında Kısa Bilgi", new { @class = "fontBold" })
+        @Html.TextBoxFor(x => x.AboutShort, new { @class = "form-control" })
+  
+
+        <div class="form-group">
+            @Html.Label("Yazarın Unvanı", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorTitle, new { @class = "form-control" })
+    
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Yazar Hakkında", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorAbout, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorAbout, "", new { @class = "text-danger" })
+
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Telefon Numarası", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorPhoneNumber, new { @class = "form-control" })
+       
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Mail Adresi", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorMail, new { @class = "form-control" })
+       
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Şifre", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorPassword, new { @class = "form-control" })
+
+
+        </div>
+
+
+        <button class="btn btn-primary newBlogAddButton px-3 fontBold">Güncelle</button>
+
+    </div>
+}
+

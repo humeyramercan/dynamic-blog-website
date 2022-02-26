@@ -1,0 +1,62 @@
+﻿@model EntityLayer.Concrete.Author
+@{
+    ViewBag.Title = "AddNewYazar";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("AddNewAuthor", "Author", FormMethod.Post, new {enctype="multipart/form-data", @class = "col-8 py-3" }))
+{
+
+    <div class="form-group ">
+        @Html.Label("Yazar Adı Soyadı", new { @class = "fontBold" })
+        @Html.TextBoxFor(x =>x.AuthorName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x=>x.AuthorName,"",new { @class="text-danger"})
+    </div>
+    <div class="form-group">
+        @Html.Label("Profil Resmi ", new { @class = "fontBold" })
+        <br />
+        <input type="file" name="AuthorImage" />
+        @Html.ValidationMessageFor(x => x.AuthorImage, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Yazar Hakkında Kısa Bilgi", new { @class = "fontBold" })
+        @Html.TextBoxFor(x => x.AboutShort, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AboutShort, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Yazarın Unvanı", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorTitle, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Yazar Hakkında", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorAbout, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorAbout, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Telefon Numarası", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorPhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorPhoneNumber, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Mail Adresi", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorMail, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorMail, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.Label("Şifre", new { @class = "fontBold" })
+            @Html.TextBoxFor(x => x.AuthorPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AuthorPassword, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        <button class="btn btn-primary newBlogAddButton px-3 fontBold">Ekle</button>
+
+    </div>
+}
+

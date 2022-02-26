@@ -1,0 +1,37 @@
+﻿@model EntityLayer.Concrete.Category
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+
+
+<style>
+    .newBlogAddButton {
+        background-image: linear-gradient(to left bottom,rgba(29, 179, 206, 0.8),rgb(151, 186, 224));
+    }
+
+    .fontBold {
+        font-family: 'Martel', serif;
+        font-weight: 800;
+    }
+</style>
+
+@using (Html.BeginForm("UpdateCategory", "Category", FormMethod.Post, new { @class = "col-8 " }))
+{
+
+    @Html.TextBoxFor(x => x.CategoryID, new { style = "display: none;" })
+    @Html.TextBoxFor(x => x.CategoryName, new { style = "display: none;" })
+
+    <div class="form-group pt-3">
+        @Html.Label("Kategori Açıklaması", new { @class = "fontBold" })
+        @Html.TextAreaFor(x => x.CategoryDescription,10,40, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CategoryDescription, "", new { @class = "text-danger" })
+
+    </div>
+
+    <button class="btn btn-primary newBlogAddButton px-3 fontBold">Güncelle</button>
+
+}
+

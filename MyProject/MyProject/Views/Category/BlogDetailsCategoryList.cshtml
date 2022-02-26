@@ -1,0 +1,11 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+<div class="sidebar-box">
+    <h3 class="heading">Kategoriler</h3>
+    <ul class="categories">
+        @foreach (var item in Model)
+        {
+        <li><a href="/Blog/BlogByCategory/@item.CategoryID">@item.CategoryName</a><!--count ile sayabilirsin kategoride kaç tane post var span (14)--> </li>
+        }
+    </ul>
+</div>

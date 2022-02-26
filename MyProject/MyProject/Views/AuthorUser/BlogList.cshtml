@@ -1,0 +1,126 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewBag.Title = "BlogList";
+    Layout = "~/Views/Shared/AuthorLayout.cshtml";
+}
+
+<style>
+    .detailsButton {
+        background-image: linear-gradient(to left bottom,rgba(169, 29, 197, 0.8),rgba(136, 134, 134, 0.2));
+    }
+
+    .updateButton {
+        background-image: linear-gradient(to left bottom,rgba(59, 206, 29, 0.8),rgb(199, 230, 196));
+    }
+
+    .deleteButton {
+        background-image: linear-gradient(to left bottom,rgba(243, 38, 11, 0.959),rgba(233, 126, 108, 0.678));
+    }
+
+    .commentsButton {
+        background-image: linear-gradient(to left bottom,rgba(23, 103, 207, 0.959),rgba(222, 244, 255, 0.678));
+    }
+
+    .newBlogAddButton {
+        background-image: linear-gradient(to left bottom,rgba(29, 179, 206, 0.8),rgb(151, 186, 224));
+    }
+
+    .fontBold {
+        font-family: 'Martel', serif;
+        font-weight: 800;
+    }
+
+    .fontNormal {
+        font-family: 'Martel', serif;
+        font-weight: 400;
+    }
+</style>
+
+<div class="card card-primary card-outline">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle"
+                 src="@ViewBag.AuthorImage"
+                 alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center">@ViewBag.AuthorName</h3>
+
+        <p class="text-muted text-center">@ViewBag.AuthorTitle</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>Mail: </b> @ViewBag.AuthorMail
+            </li>
+            <li class="list-group-item">
+                <b>Telefon: </b> @ViewBag.AuthorPhoneNumber
+            </li>
+            <li class="list-group-item">
+                <b>Kısa Bilgiler: </b> @ViewBag.AboutShort
+            </li>
+            <li class="list-group-item">
+                <b>Hakkında: </b> @ViewBag.AuthorAbout
+            </li>
+        </ul>
+
+        <a href="/AuthorUser/UpdateAuthor/" class="btn btn-primary btn-block"><b>Bilgileri Güncelle</b></a>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+<table class="table table-striped table-bordered  ">
+    <!--direkt table classını verirrsek tablomuz daha güzel bir hal alır-->
+    <thead class="fontBold">
+        <tr>
+            <th hidden>#</th>
+            <th>Başlık</th>
+            <th>Kategori</th>
+            <th>Yazar</th>
+            <th>Beğeni Oranı</th>
+            <th>Tarih</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
+            <th>Yorumlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.BlogStatus == true)
+            {
+                <tr>
+                    <td hidden>@item.BlogID</td>
+                    <td>@item.BlogTitle</td>
+                    <td>@item.Category.CategoryName</td>
+                    <td>@item.Author.AuthorName</td>
+                    <td class="project_progress">
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: @(item.BlogRating*10)%">
+                            </div>
+                        </div>
+                        <small>
+                            @(item.BlogRating*10)%
+                        </small>
+                    </td>
+                    <td>@(((DateTime)item.BlogDate).ToString("dd-MMM-yyyy"))</td>
+                    <td><a href="/AuthorUser/DeleteBlog/@item.BlogID " class="btn btn-primary deleteButton">Sil</a></td>
+                    <td><a href="/AuthorUser/UpdateBlog/@item.BlogID" class="btn btn-primary updateButton">Güncelle</a></td>
+                    <td> <a href="/Blog/BlogDetails/@item.BlogID" class="btn btn-primary detailsButton">Detaylar</a></td>
+                    <td><a href="/AuthorUser/PublishedComments/@item.BlogID" class="btn btn-primary commentsButton">Yorumlar</a></td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="row text-center pb-2">
+    <div class="col-4 mx-auto  ">
+        <a href="/AuthorUser/AddNewBlog" class="btn btn-primary newBlogAddButton  w-100 ">Yeni Blog Ekle</a>
+    </div>
+    <div class="col-2 ">
+        <a href="/AuthorUser/LogOut" class="btn btn-danger ">  <i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+    </div>
+</div>

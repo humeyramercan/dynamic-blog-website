@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    //Site ilk açıldığında karşımıza çıkan anasayfa
+}
+@Html.Action("FeaturedPost","Blog")
+@Html.Action("BlogList","Blog")
+@Html.Action("Footer","About")
+

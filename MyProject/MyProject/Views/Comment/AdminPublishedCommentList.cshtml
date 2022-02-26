@@ -1,0 +1,93 @@
+﻿@using EntityLayer.Concrete
+@model List<Comment>
+@{
+    ViewBag.Title = "AdminCommentList";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<body class="hold-transition sidebar-mini">
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="card-body">
+
+                    <!-- Post -->
+                    @foreach (var item in Model)
+                    {
+
+                    <div class="post">
+
+                        <div class="user-block">
+
+                            <img class="img-circle img-bordered-sm" src="~/AdminLTE-3.0.4/dist/img/usericon1.png" alt="user image">
+
+                            <span class="username" style="color:rgb(52, 168, 235)">
+
+                                @item.UserName  (@item.Mail)
+
+
+                            </span>
+
+                            <span class="username" style="color:rgb(20, 36, 163)">
+
+                                @item.Blog.BlogTitle
+
+
+                            </span>
+
+
+                            <span class="description">@(((DateTime)item.CommentDate).ToString("dd-MMM-yyyy"))</span>
+
+                        </div>
+
+                        <!-- /.user-block -->
+
+                        <p>
+
+                            @item.CommentText
+
+                        </p>
+                
+
+                        <p>
+
+
+                            <span class="float-right">
+
+                                <a href="/Comment/RemoveComment/@item.CommentID" class="link-black text-sm mr-2 "onclick="return confirm('Emin misiniz?')"><i class="far fa-times-circle " style="color:red"></i> Yorumu Kaldır</a>
+
+
+                            </span>
+                            <br />
+
+                        </p>
+
+                    
+
+                    </div>
+                    }
+                </div>
+
+            </div>
+
+        </div><!-- /.card-body -->
+
+
+
+    </section>
+
+</body>
+
+</html>
+
